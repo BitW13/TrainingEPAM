@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Картины";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@for (int i = 1; i <= 31; i += 3)
+{
+<div class="row">
+    @{
+
+        ViewBag.Index = i.ToString() + ".jpg";
+
+        <div class="col-md-4">
+            <p><a class="btn btn-default" href="~/Content/Gallery/@ViewBag.Index"><img src="~/Content/Gallery/@ViewBag.Index" width="350px" /></a></p>
+        </div>
+        if (i + 1 <= 31)
+        {
+            ViewBag.Index = (i + 1).ToString() + ".jpg";
+            <div class="col-md-4">
+                <p><a class="btn btn-default" href="~/Content/Gallery/@ViewBag.Index"><img src="~/Content/Gallery/@ViewBag.Index" width="350px" /></a></p>
+            </div>
+        }
+        if (i + 2 <= 31)
+        {
+            ViewBag.Index = (i + 2).ToString() + ".jpg";
+            <div class="col-md-4">
+                <p><a class="btn btn-default" href="~/Content/Gallery/@ViewBag.Index"><img src="~/Content/Gallery/@ViewBag.Index" width="350px" /></a></p>
+            </div>
+        }
+
+    }
+</div>
+}
