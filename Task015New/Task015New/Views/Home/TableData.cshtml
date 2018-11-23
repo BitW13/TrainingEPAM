@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Task015New.Models.User>
+
+@if (Model.Count() == 0)
+{
+    <tr>
+        <td colspan="8" style="color:red;" class="text-center">
+            Пользователь не найден
+        </td>
+    </tr>
+}
+
+@foreach (var m in @Model)
+{
+    <tr>
+        @Html.HiddenFor(item => m.Id)
+        <td>
+            @Html.RadioButton("selectedItem", m.Id, new { @class = "radio" })
+        </td>
+        <td>
+            @Html.DisplayFor(item => m.Name)
+            @Html.HiddenFor(item => m.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(item => m.MiddleName)
+            @Html.HiddenFor(item => m.MiddleName)
+        </td>
+        <td>
+            @Html.DisplayFor(item => m.LastName)
+            @Html.HiddenFor(item => m.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(item => m.Email)
+            @Html.HiddenFor(item => m.Email)
+            @Html.HiddenFor(item => m.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(item => m.Age)
+            @Html.HiddenFor(item => m.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(item => m.Phone)
+            @Html.HiddenFor(item => m.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(item => m.Address)
+            @Html.HiddenFor(item => m.Address)
+        </td>
+    </tr>
+}
