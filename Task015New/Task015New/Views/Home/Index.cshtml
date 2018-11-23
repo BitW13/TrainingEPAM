@@ -1,0 +1,114 @@
+﻿@model PagedList.IPagedList<Task015New.Models.User>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="body-content container">
+
+    <h2>Список пользователей</h2>
+
+    @using (Ajax.BeginForm("Index", "Home", new AjaxOptions { UpdateTargetId = "table", Url = Url.Action("TableData") }, new { @id = "tableOfUsers" }))
+    {
+
+        <table class="table table-bordered table-hover table-striped">
+
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        @Html.DisplayName("Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("MiddleName")
+                    </th>
+                    <th>
+                        @Html.DisplayName("LastName")
+                    </th>
+                    <th>
+                        @Html.DisplayName("E-mail")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Age")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Phone")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Address")
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <div id="table">
+                    @Html.Action("TableData")
+                </div>
+            </tbody>
+
+        </table>
+
+
+
+        <div class="pagination">
+            Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "Get", UpdateTargetId = "table" }))
+        </div>
+
+            <br />
+
+
+            <div>
+
+                <div class="col-md-8">
+
+                    <p>Фильтр:</p>
+
+                    <div class="input-group">
+
+                        <div class="radio">
+                            <input type="radio" name="actionRadio" form="tableOfUsers" value="allRecords" onchange="setSelect()" checked />Все записи
+                        </div>
+
+                        <div class="radio">
+                            <input type="radio" id="radioListOfSelect" name="actionRadio" form="tableOfUsers" value="Search" onchange="setSelect()" />Только записи
+                        </div>
+
+                        <input type="text" id="listSelect" name="search" form="tableOfUsers" class="search" placeholder="Поиск" style="width:450px" disabled />
+                                               
+                    </div>
+                    <br />
+
+                    <input type="submit" value="Показать" class="btn btn-info" />
+
+                </div>
+
+                <div class="col-md-4">
+                    <input type="submit" class="btn btn-primary" name="action" value="Add" />
+                    <input type="submit" class="btn btn-primary" name="action" value="Update" />
+                    <input type="submit" class="btn btn-primary" name="action" value="Remove" />
+                </div>
+
+            </div>
+            
+    }
+
+    </div>
+
+
+
+    <script>
+        function setSelect() {
+            if (document.getElementById("radioListOfSelect").checked) {
+                document.getElementById("listSelect").disabled = false;
+            }
+            else {
+                document.getElementById("listSelect").disabled = true;
+            }
+        }
+    </script>
